@@ -19,3 +19,5 @@
 /packages
 /BaseSource.Web/obj/Debug
 /BaseSource.Web/bin
+/.vs/BaseSource/v14
+/BaseSource.Data/bin

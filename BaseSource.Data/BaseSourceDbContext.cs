@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BaseSource.Common;
+using System.Data.Entity;
 
 namespace BaseSource.Data
 {
-    class BaseSourceDbContext
+    internal class BaseSourceDbContext : DbContext, IBaseSourceDbContext
     {
+        public BaseSourceDbContext(string connectionString) : base(connectionString)
+        {
+            Database.SetInitializer<BaseSourceDbContext>(null);
+            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
+        }
     }
 }
