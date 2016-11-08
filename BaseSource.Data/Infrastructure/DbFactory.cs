@@ -21,7 +21,7 @@ namespace BaseSource.Data.Infrastructure
         {
             if (_context != null) return _context;
 
-            _context = CreateObject(() => new BaseSourceDbContext(Constants.CONNECTION_STRING));
+            _context = CreateObject(() => new BaseSourceDbContext());
 
             return _context;
         }

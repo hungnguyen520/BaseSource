@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BaseSource.Model.Models
 {
-    class ProductCatalog : IEntity<Guid>
+    public class ProductCatalog : IEntity<Guid>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

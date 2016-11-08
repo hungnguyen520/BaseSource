@@ -10,6 +10,6 @@ namespace BaseSource.Common
     {
         public const string CONNECTION_STRING = "BaseSourceConnection";
 
-        public const string EMAIL_CONTACT = "nguyenphihung520@gmail.com";
+        public const string EMAIL_CONTACT = "nphihung@tma.com.vn";
     }
 }

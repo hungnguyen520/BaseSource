@@ -1,15 +1,18 @@
 ﻿using BaseSource.Common;
+using BaseSource.Model.Models;
 using System.Data.Entity;
 
 namespace BaseSource.Data
 {
-    internal class BaseSourceDbContext : DbContext, IBaseSourceDbContext
+    public class BaseSourceDbContext : DbContext, IBaseSourceDbContext
     {
-        public BaseSourceDbContext(string connectionString) : base(connectionString)
+        public BaseSourceDbContext() : base(Constants.CONNECTION_STRING)
         {
             Database.SetInitializer<BaseSourceDbContext>(null);
             Configuration.ProxyCreationEnabled = true;
             Configuration.LazyLoadingEnabled = true;
         }
+
+        public virtual DbSet<ProductCatalog> ProductCatalogs { get; set; }
     }
 }
