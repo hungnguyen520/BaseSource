@@ -7,6 +7,6 @@ namespace BaseSource.Model.Models
         TKey Id { get; set; }
         bool IsDeleted { get; set; }
         DateTime CreateDate { get; set; }
-        DateTime UpdateDate { get; set; }
+        DateTime? UpdateDate { get; set; }
     }
 }
