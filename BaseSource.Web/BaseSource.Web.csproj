@@ -246,6 +246,16 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseSource.Data\BaseSource.Data.csproj">
+      <Project>{141da08c-8929-47a7-8b5f-cf30ae446c7d}</Project>
+      <Name>BaseSource.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseSource.Model\BaseSource.Model.csproj">
+      <Project>{70546904-d76d-4398-ad75-6f2bd01cc34e}</Project>
+      <Name>BaseSource.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

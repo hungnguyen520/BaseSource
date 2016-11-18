@@ -1,10 +1,11 @@
 ﻿using BaseSource.Common;
 using BaseSource.Model.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
 namespace BaseSource.Data
 {
-    public class BaseSourceDbContext : DbContext, IBaseSourceDbContext
+    public class BaseSourceDbContext : IdentityDbContext<ApplicationUser>, IBaseSourceDbContext
     {
         public BaseSourceDbContext() : base(Constants.CONNECTION_STRING)
         {
@@ -20,5 +21,16 @@ namespace BaseSource.Data
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+
+        public static BaseSourceDbContext Create()
+        {
+            return new BaseSourceDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder builder)
+        {
+            builder.Entity<IdentityUserRole>().HasKey(i => i.UserId);
+            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
+        }
     }
 }

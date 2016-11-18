@@ -1,35 +1,18 @@
-﻿using BaseSource.Common;
-using BaseSource.Data;
-using BaseSource.Data.Infrastructure;
-
-namespace BaseSource.Data.Infrastructure
+﻿namespace BaseSource.Data.Infrastructure
 {
-    public class DbFactory : DisposableObject, IDbFactory
+    public class DbFactory : Disposable, IDbFactory
     {
-        private IBaseSourceDbContext _context;
-        public DbFactory(IBaseSourceDbContext context)
+        private BaseSourceDbContext dbContext;
+
+        public BaseSourceDbContext Init()
         {
-            _context = context;
+            return dbContext ?? (dbContext = new BaseSourceDbContext());
         }
-
-        public DbFactory()
-        {
-
-        }
-
-        public IBaseSourceDbContext Init()
-        {
-            if (_context != null) return _context;
-
-            _context = CreateObject(() => new BaseSourceDbContext());
-
-            return _context;
-        }
-
 
         protected override void DisposeCore()
         {
-            _context = null;
+            if (dbContext != null)
+                dbContext.Dispose();
         }
     }
 }
