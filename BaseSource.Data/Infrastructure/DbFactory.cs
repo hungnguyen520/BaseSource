@@ -2,17 +2,17 @@
 {
     public class DbFactory : Disposable, IDbFactory
     {
-        private BaseSourceDbContext dbContext;
+        private IBaseSourceDbContext _dbContext;
 
-        public BaseSourceDbContext Init()
+        public IBaseSourceDbContext Init()
         {
-            return dbContext ?? (dbContext = new BaseSourceDbContext());
+            return _dbContext ?? (_dbContext = new BaseSourceDbContext());
         }
 
         protected override void DisposeCore()
         {
-            if (dbContext != null)
-                dbContext.Dispose();
+            if (_dbContext != null)
+                _dbContext.Dispose();
         }
     }
 }

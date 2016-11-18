@@ -1,17 +1,14 @@
-﻿using BaseSource.Model.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseSource.Model.Models
 {
-    public class ProductCatalog : IEntity<Guid>
+    public class ProductCatalog : ModelBase<Guid>
     {
         [Key]
         public Guid Id { get; set; }
+
         public bool IsDeleted { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }

@@ -9,7 +9,7 @@ using static BaseSource.Common.Enums;
 
 namespace BaseSource.Model.Models
 {
-    public class Order : IEntity<Guid>
+    public class Order : ModelBase<Guid>
     {
         [Key]
         public Guid Id { get; set; }

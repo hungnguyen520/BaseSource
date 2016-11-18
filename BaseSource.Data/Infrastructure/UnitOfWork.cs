@@ -1,29 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BaseSource.Data.Repositories;
 
 namespace BaseSource.Data.Infrastructure
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : Disposable, IUnitOfWork
     {
-        private readonly IDbFactory dbFactory;
-        private BaseSourceDbContext dbContext;
+        private IDbFactory _dbFactory;
+        private IBaseSourceDbContext _dbContext;
 
         public UnitOfWork(IDbFactory dbFactory)
         {
-            this.dbFactory = dbFactory;
+            this._dbFactory = dbFactory;
         }
 
-        public BaseSourceDbContext DbContext
+        public IBaseSourceDbContext DbContext
         {
-            get { return dbContext ?? (dbContext = dbFactory.Init()); }
+            get { return _dbContext ?? (_dbContext = _dbFactory.Init()); }
         }
 
         public void Commit()
         {
             DbContext.SaveChanges();
+        }
+
+        //===================================================================================================
+
+        private IProductCatalogRepository _productCatalogRepository;
+        private IProductRepository _productRepository;
+
+        IProductCatalogRepository IUnitOfWork.productCatalogRepository => _productCatalogRepository;
+        IProductRepository IUnitOfWork.productRepository => _productRepository;
+
+        //===================================================================================================
+
+        protected override void DisposeCore()
+        {
+            _dbFactory = null;
+            _dbContext = null;
+
+            _productCatalogRepository = null;
+            _productRepository = null;
+
+            base.DisposeCore();
         }
     }
 }

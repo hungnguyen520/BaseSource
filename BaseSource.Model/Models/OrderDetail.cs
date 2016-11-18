@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BaseSource.Model.Models
 {
-    public class OrderDetail
+    public class OrderDetail: ModelBase<Guid>
     {
         [Key]
         [Column(Order = 1)]

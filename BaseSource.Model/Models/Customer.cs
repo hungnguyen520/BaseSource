@@ -8,7 +8,7 @@ using static BaseSource.Common.Enums;
 
 namespace BaseSource.Model.Models
 {
-    public class Customer : IEntity<Guid>
+    public class Customer : ModelBase<Guid>
     {
         [Key]
         public Guid Id { get; set; }

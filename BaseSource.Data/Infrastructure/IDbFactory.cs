@@ -4,6 +4,6 @@ namespace BaseSource.Data.Infrastructure
 {
     public interface IDbFactory : IDisposable
     {
-        BaseSourceDbContext Init();
+        IBaseSourceDbContext Init();
     }
 }

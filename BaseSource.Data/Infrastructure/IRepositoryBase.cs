@@ -5,35 +5,35 @@ using System.Linq.Expressions;
 
 namespace BaseSource.Data.Infrastructure
 {
-    public interface IRepositoryBase<T> where T : class
+    public interface IRepositoryBase<TEntity,TKey> where TEntity : class
     {
         // Marks an entity as new
-        T Add(T entity);
+        TEntity Add(TEntity entity);
 
         // Marks an entity as modified
-        void Update(T entity);
+        void Update(TEntity entity);
 
         // Marks an entity to be removed
-        T Delete(T entity);
+        TEntity Delete(TEntity entity);
 
-        T Delete(int id);
+        TEntity Delete(TKey id);
 
         //Delete multi records
-        void DeleteMulti(Expression<Func<T, bool>> where);
+        void DeleteMulti(Expression<Func<TEntity, bool>> where);
 
         // Get an entity by int id
-        T GetSingleById(int id);
+        TEntity GetSingleById(TKey id);
 
-        T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
+        TEntity GetSingleByCondition(Expression<Func<TEntity, bool>> expression, string[] includes = null);
 
-        IEnumerable<T> GetAll(string[] includes = null);
+        IEnumerable<TEntity> GetAll(string[] includes = null);
 
-        IEnumerable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null);
+        IEnumerable<TEntity> GetMulti(Expression<Func<TEntity, bool>> predicate, string[] includes = null);
 
-        IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> filter, out int total, int index = 0, int size = 50, string[] includes = null);
+        IEnumerable<TEntity> GetMultiPaging(Expression<Func<TEntity, bool>> filter, out int total, int index = 0, int size = 50, string[] includes = null);
 
-        int Count(Expression<Func<T, bool>> where);
+        int Count(Expression<Func<TEntity, bool>> where);
 
-        bool CheckContains(Expression<Func<T, bool>> predicate);
+        bool CheckContains(Expression<Func<TEntity, bool>> predicate);
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BaseSource.Model.Models
 {
-    public class Product : IEntity<Guid>
+    public class Product : ModelBase<Guid>
     {
         [Key]
         public Guid Id { get; set; }
@@ -17,11 +17,11 @@ namespace BaseSource.Model.Models
         public DateTime? UpdateDate { get; set; }
 
         public string Name { get; set; }
-        public int InStock { get; set; }
+        public int NumberInStock { get; set; }
         public decimal Price { get; set; }
-        public byte SafeOff { get; set; }
+        public byte? SafeOff { get; set; }
         public string Description { get; set; }
-        public int Priority { get; set; }
+        public bool HotFlag { get; set; }
         public string ImageUrl { get; set; }
 
         public Guid BrandId { get; set; }
