@@ -44,6 +44,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.2.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.0\lib\net451\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -173,20 +185,12 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -201,18 +205,32 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BaseSource.Common\BaseSource.Common.csproj">
+      <Project>{c4f8dcfe-3fb3-42c9-8260-6ac4403debf9}</Project>
+      <Name>BaseSource.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BaseSource.Data\BaseSource.Data.csproj">
       <Project>{141da08c-8929-47a7-8b5f-cf30ae446c7d}</Project>
       <Name>BaseSource.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BaseSource.Web\BaseSource.Web.csproj">
-      <Project>{593a2ab3-603e-4216-b1be-ded26912471e}</Project>
-      <Name>BaseSource.Web</Name>
+    <ProjectReference Include="..\BaseSource.Identity\BaseSource.Identity.csproj">
+      <Project>{ede4ec9e-8254-47da-adab-49561a76a113}</Project>
+      <Name>BaseSource.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseSource.Model\BaseSource.Model.csproj">
+      <Project>{70546904-d76d-4398-ad75-6f2bd01cc34e}</Project>
+      <Name>BaseSource.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseSource.Service\BaseSource.Service.csproj">
+      <Project>{651f3fbc-ce0c-473f-8db1-21c8ed90fb50}</Project>
+      <Name>BaseSource.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

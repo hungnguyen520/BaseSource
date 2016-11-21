@@ -18,9 +18,9 @@ namespace BaseSource.Service
 
         IEnumerable<Product> GetHotProduct(int top);
 
-        IEnumerable<Product> GetListProductByCategoryIdPaging(Guid categoryId, int page, int pageSize, string sort, out int totalRow);
+        IEnumerable<Product> GetListProductByCategoryIdPaging(Guid categoryId, int page, int pageSize, string sort, int totalRow);
 
-        IEnumerable<Product> Search(string keyword, int page, int pageSize, string sort, out int totalRow);
+        IEnumerable<Product> Search(string keyword, int page, int pageSize, string sort, int totalRow);
 
         IEnumerable<string> GetListProductByName(string name);
 

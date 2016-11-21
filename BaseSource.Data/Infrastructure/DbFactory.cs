@@ -2,6 +2,7 @@
 {
     public class DbFactory : Disposable, IDbFactory
     {
+
         private IBaseSourceDbContext _dbContext;
 
         public IBaseSourceDbContext Init()
