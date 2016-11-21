@@ -1,8 +1,7 @@
 namespace BaseSource.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UpdateProductTable : DbMigration
     {
         public override void Up()
@@ -13,7 +12,7 @@ namespace BaseSource.Data.Migrations
             DropColumn("dbo.Products", "InStock");
             DropColumn("dbo.Products", "Priority");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Products", "Priority", c => c.Int(nullable: false));

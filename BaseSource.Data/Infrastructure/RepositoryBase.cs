@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace BaseSource.Data.Infrastructure
 {
-    public abstract class RepositoryBase<TEntity,TKey> : IRepositoryBase<TEntity,TKey> where TEntity : class
+    public abstract class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey> where TEntity : class
     {
         private IBaseSourceDbContext _dbContext;
         private readonly IDbSet<TEntity> dbSet;

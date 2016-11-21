@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BaseSource.Common.Enums;
 
 namespace BaseSource.Model.Models
@@ -12,6 +9,7 @@ namespace BaseSource.Model.Models
     {
         [Key]
         public Guid Id { get; set; }
+
         public bool IsDeleted { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
@@ -23,6 +21,5 @@ namespace BaseSource.Model.Models
         public GENDER Gender { get; set; }
 
         public virtual IEnumerable<Order> OrderList { get; set; }
-
     }
 }

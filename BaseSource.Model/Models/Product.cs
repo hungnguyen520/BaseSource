@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseSource.Model.Models
 {
@@ -12,6 +8,7 @@ namespace BaseSource.Model.Models
     {
         [Key]
         public Guid Id { get; set; }
+
         public bool IsDeleted { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
@@ -31,10 +28,11 @@ namespace BaseSource.Model.Models
 
         [ForeignKey("BrandId")]
         public virtual Brand BrandRef { get; set; }
+
         [ForeignKey("ProductCatalogId")]
         public virtual ProductCatalog ProductCatalogRef { get; set; }
+
         [ForeignKey("UnitId")]
         public virtual Unit UnitRef { get; set; }
-
     }
 }

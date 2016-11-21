@@ -1,8 +1,7 @@
 namespace BaseSource.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class InitDB : DbMigration
     {
         public override void Up()
@@ -10,85 +9,85 @@ namespace BaseSource.Data.Migrations
             CreateTable(
                 "dbo.Brands",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        UpdateDate = c.DateTime(),
-                        Name = c.String(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    IsDeleted = c.Boolean(nullable: false),
+                    CreateDate = c.DateTime(nullable: false),
+                    UpdateDate = c.DateTime(),
+                    Name = c.String(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Customers",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        UpdateDate = c.DateTime(),
-                        Name = c.String(),
-                        Email = c.String(),
-                        Address = c.String(),
-                        Phone = c.String(),
-                        Gender = c.Byte(nullable: false),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    IsDeleted = c.Boolean(nullable: false),
+                    CreateDate = c.DateTime(nullable: false),
+                    UpdateDate = c.DateTime(),
+                    Name = c.String(),
+                    Email = c.String(),
+                    Address = c.String(),
+                    Phone = c.String(),
+                    Gender = c.Byte(nullable: false),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.OrderDetails",
                 c => new
-                    {
-                        OrderId = c.Guid(nullable: false),
-                        ProductId = c.Guid(nullable: false),
-                        Quantity = c.Int(nullable: false),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                    })
+                {
+                    OrderId = c.Guid(nullable: false),
+                    ProductId = c.Guid(nullable: false),
+                    Quantity = c.Int(nullable: false),
+                    Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                })
                 .PrimaryKey(t => new { t.OrderId, t.ProductId })
                 .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
                 .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
                 .Index(t => t.OrderId)
                 .Index(t => t.ProductId);
-            
+
             CreateTable(
                 "dbo.Orders",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        UpdateDate = c.DateTime(),
-                        DeliveryDate = c.DateTime(nullable: false),
-                        Value = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Note = c.String(),
-                        Status = c.Byte(nullable: false),
-                        PayMethod = c.Byte(nullable: false),
-                        CustomerId = c.Guid(nullable: false),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    IsDeleted = c.Boolean(nullable: false),
+                    CreateDate = c.DateTime(nullable: false),
+                    UpdateDate = c.DateTime(),
+                    DeliveryDate = c.DateTime(nullable: false),
+                    Value = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    Note = c.String(),
+                    Status = c.Byte(nullable: false),
+                    PayMethod = c.Byte(nullable: false),
+                    CustomerId = c.Guid(nullable: false),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
                 .Index(t => t.CustomerId);
-            
+
             CreateTable(
                 "dbo.Products",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        UpdateDate = c.DateTime(),
-                        Name = c.String(),
-                        InStock = c.Int(nullable: false),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        SafeOff = c.Byte(nullable: false),
-                        Description = c.String(),
-                        Priority = c.Int(nullable: false),
-                        ImageUrl = c.String(),
-                        BrandId = c.Guid(nullable: false),
-                        CountryId = c.Guid(nullable: false),
-                        ProductCatalogId = c.Guid(nullable: false),
-                        UnitId = c.Guid(nullable: false),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    IsDeleted = c.Boolean(nullable: false),
+                    CreateDate = c.DateTime(nullable: false),
+                    UpdateDate = c.DateTime(),
+                    Name = c.String(),
+                    InStock = c.Int(nullable: false),
+                    Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    SafeOff = c.Byte(nullable: false),
+                    Description = c.String(),
+                    Priority = c.Int(nullable: false),
+                    ImageUrl = c.String(),
+                    BrandId = c.Guid(nullable: false),
+                    CountryId = c.Guid(nullable: false),
+                    ProductCatalogId = c.Guid(nullable: false),
+                    UnitId = c.Guid(nullable: false),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Brands", t => t.BrandId, cascadeDelete: true)
                 .ForeignKey("dbo.ProductCatalogs", t => t.ProductCatalogId, cascadeDelete: true)
@@ -96,34 +95,33 @@ namespace BaseSource.Data.Migrations
                 .Index(t => t.BrandId)
                 .Index(t => t.ProductCatalogId)
                 .Index(t => t.UnitId);
-            
+
             CreateTable(
                 "dbo.ProductCatalogs",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        UpdateDate = c.DateTime(),
-                        Name = c.String(),
-                        Priority = c.Int(nullable: false),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    IsDeleted = c.Boolean(nullable: false),
+                    CreateDate = c.DateTime(nullable: false),
+                    UpdateDate = c.DateTime(),
+                    Name = c.String(),
+                    Priority = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Units",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        UpdateDate = c.DateTime(),
-                        Name = c.String(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    IsDeleted = c.Boolean(nullable: false),
+                    CreateDate = c.DateTime(nullable: false),
+                    UpdateDate = c.DateTime(),
+                    Name = c.String(),
+                })
                 .PrimaryKey(t => t.Id);
-            
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.OrderDetails", "ProductId", "dbo.Products");

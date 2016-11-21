@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace BaseSource.Data.Infrastructure
 {
-    public interface IRepositoryBase<TEntity,TKey> where TEntity : class
+    public interface IRepositoryBase<TEntity, TKey> where TEntity : class
     {
         // Marks an entity as new
         TEntity Add(TEntity entity);

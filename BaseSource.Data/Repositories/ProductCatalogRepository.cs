@@ -8,7 +8,6 @@ namespace BaseSource.Data.Repositories
     {
         public ProductCatalogRepository(IDbFactory dbFactory) : base(dbFactory)
         {
-
         }
     }
 }

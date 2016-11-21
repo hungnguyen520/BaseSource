@@ -2,15 +2,11 @@
 using BaseSource.Model.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseSource.Service
 {
     public class ProductCatalogService : IProductCatalogService
     {
-      
         private IUnitOfWork _unitOfWork;
 
         public ProductCatalogService(IUnitOfWork unitOfWork)

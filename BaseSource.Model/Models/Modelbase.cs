@@ -4,9 +4,9 @@ namespace BaseSource.Model.Models
 {
     public class ModelBase<TKey>
     {
-        TKey Id { get; set; }
-        bool IsDeleted { get; set; }
-        DateTime CreateDate { get; set; }
-        DateTime? UpdateDate { get; set; }
+        private TKey Id { get; set; }
+        private bool IsDeleted { get; set; }
+        private DateTime CreateDate { get; set; }
+        private DateTime? UpdateDate { get; set; }
     }
 }
