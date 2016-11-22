@@ -1,77 +1,67 @@
-﻿using System;
+﻿using BaseSource.Factory.DbContexts;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace BaseSource.Data.Infrastructure
+namespace BaseSource.Repository.Core
 {
-    public abstract class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey> where TEntity : class
+    public abstract class RepositoryBase<TEntity, TKey> where TEntity : class
     {
-        private IBaseSourceDbContext _dbContext;
-        private readonly IDbSet<TEntity> dbSet;
+        private IMainDbContext _dbContext;
+        private IDbSet<TEntity> _dbSet;
 
-        protected IDbFactory DbFactory
+        protected RepositoryBase(IMainDbContext dbContext)
         {
-            get;
-            private set;
-        }
-
-        protected IBaseSourceDbContext DbContext
-        {
-            get { return _dbContext ?? (_dbContext = DbFactory.Init()); }
-        }
-
-        protected RepositoryBase(IDbFactory dbFactory)
-        {
-            DbFactory = dbFactory;
-            dbSet = DbContext.Set<TEntity>();
+            this._dbContext = dbContext;
+            this._dbSet = _dbContext.Set<TEntity>();
         }
 
         //===============================================================================================
 
         public virtual TEntity Add(TEntity entity)
         {
-            return dbSet.Add(entity);
+            return _dbSet.Add(entity);
         }
 
         public virtual void Update(TEntity entity)
         {
-            dbSet.Attach(entity);
+            _dbSet.Attach(entity);
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual TEntity Delete(TEntity entity)
         {
-            return dbSet.Remove(entity);
+            return _dbSet.Remove(entity);
         }
 
         public virtual TEntity Delete(TKey id)
         {
-            var entity = dbSet.Find(id);
-            return dbSet.Remove(entity);
+            var entity = _dbSet.Find(id);
+            return _dbSet.Remove(entity);
         }
 
         public virtual void DeleteMulti(Expression<Func<TEntity, bool>> where)
         {
-            IEnumerable<TEntity> objects = dbSet.Where<TEntity>(where).AsEnumerable();
+            IEnumerable<TEntity> objects = _dbSet.Where<TEntity>(where).AsEnumerable();
             foreach (TEntity obj in objects)
-                dbSet.Remove(obj);
+                _dbSet.Remove(obj);
         }
 
         public virtual TEntity GetSingleById(TKey id)
         {
-            return dbSet.Find(id);
+            return _dbSet.Find(id);
         }
 
         public virtual IEnumerable<TEntity> GetMany(Expression<Func<TEntity, bool>> where, string includes)
         {
-            return dbSet.Where(where).ToList();
+            return _dbSet.Where(where).ToList();
         }
 
         public virtual int Count(Expression<Func<TEntity, bool>> where)
         {
-            return dbSet.Count(where);
+            return _dbSet.Count(where);
         }
 
         public IEnumerable<TEntity> GetAll(string[] includes = null)

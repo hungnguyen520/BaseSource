@@ -1,14 +1,15 @@
-﻿using BaseSource.Data.Infrastructure;
+﻿using BaseSource.Repository.Core;
 using BaseSource.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BaseSource.Factory.DbContexts;
 
-namespace BaseSource.Data.Repositories
+namespace BaseSource.Repository.Repositories
 {
-    public class ProductRepository : RepositoryBase<Product, Guid>, IProductRepository
+    public class ProductRepository : RepositoryBase<Product, Guid>
     {
-        public ProductRepository(IDbFactory dbFactory) : base(dbFactory)
+        public ProductRepository(IMainDbContext dbContext) : base(dbContext)
         {
         }
 

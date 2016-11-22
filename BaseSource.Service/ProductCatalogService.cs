@@ -1,5 +1,5 @@
-﻿using BaseSource.Data.Infrastructure;
-using BaseSource.Model.Models;
+﻿using BaseSource.Model.Models;
+using BaseSource.Repository.Core;
 using System;
 using System.Collections.Generic;
 

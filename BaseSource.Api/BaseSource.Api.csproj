@@ -216,9 +216,13 @@
       <Project>{c4f8dcfe-3fb3-42c9-8260-6ac4403debf9}</Project>
       <Name>BaseSource.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BaseSource.Data\BaseSource.Data.csproj">
+    <ProjectReference Include="..\BaseSource.Data\BaseSource.Repository.csproj">
       <Project>{141da08c-8929-47a7-8b5f-cf30ae446c7d}</Project>
-      <Name>BaseSource.Data</Name>
+      <Name>BaseSource.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseSource.Factory\BaseSource.Factory.csproj">
+      <Project>{b4b53d55-7845-4dbb-b315-d22be98bf214}</Project>
+      <Name>BaseSource.Factory</Name>
     </ProjectReference>
     <ProjectReference Include="..\BaseSource.Identity\BaseSource.Identity.csproj">
       <Project>{ede4ec9e-8254-47da-adab-49561a76a113}</Project>

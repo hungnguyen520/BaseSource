@@ -23,3 +23,5 @@
 /BaseSource.Data/bin
 /.vs/config
 /BaseSource.Identity/bin
+/BaseSource.Factory/bin/Debug
+/BaseSource.Factory/obj/Debug

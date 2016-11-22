@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BaseSource.Data.Infrastructure
+namespace BaseSource.Factory.Core
 {
     public class Disposable : IDisposable
     {

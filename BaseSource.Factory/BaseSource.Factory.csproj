@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{651F3FBC-CE0C-473F-8DB1-21C8ED90FB50}</ProjectGuid>
+    <ProjectGuid>{B4B53D55-7845-4DBB-B315-D22BE98BF214}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaseSource.Service</RootNamespace>
-    <AssemblyName>BaseSource.Service</AssemblyName>
+    <RootNamespace>BaseSource.Factory</RootNamespace>
+    <AssemblyName>BaseSource.Factory</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,10 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProductCatalogService.cs" />
-    <Compile Include="IProductService.cs" />
-    <Compile Include="ProductCatalogService.cs" />
-    <Compile Include="ProductService.cs" />
+    <Compile Include="Core\IDbFactory.cs" />
+    <Compile Include="DbContexts\IMainDbContext.cs" />
+    <Compile Include="DbContexts\MainDbContext.cs" />
+    <Compile Include="Core\DbFactory.cs" />
+    <Compile Include="Core\Disposable.cs" />
+    <Compile Include="Migrations\201611220938311_InitDb.cs" />
+    <Compile Include="Migrations\201611220938311_InitDb.Designer.cs">
+      <DependentUpon>201611220938311_InitDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,17 +66,19 @@
       <Project>{c4f8dcfe-3fb3-42c9-8260-6ac4403debf9}</Project>
       <Name>BaseSource.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BaseSource.Data\BaseSource.Repository.csproj">
-      <Project>{141da08c-8929-47a7-8b5f-cf30ae446c7d}</Project>
-      <Name>BaseSource.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BaseSource.Model\BaseSource.Model.csproj">
       <Project>{70546904-d76d-4398-ad75-6f2bd01cc34e}</Project>
       <Name>BaseSource.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611220938311_InitDb.resx">
+      <DependentUpon>201611220938311_InitDb.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,10 +1,9 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
-using BaseSource.Data;
-using BaseSource.Data.Infrastructure;
-using BaseSource.Data.Repositories;
+using BaseSource.Factory.Core;
 using BaseSource.Identity;
+using BaseSource.Repository.Core;
 using BaseSource.Service;
 using Microsoft.Owin;
 using Owin;
@@ -18,7 +17,6 @@ namespace BaseSource.Api
 {
     public partial class Startup : IdentityStartup
     {
-
         public void ConfigAutofac(IAppBuilder app)
         {
             var builder = new ContainerBuilder();
@@ -26,12 +24,6 @@ namespace BaseSource.Api
 
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
-            builder.RegisterType<BaseSourceDbContext>().As<IBaseSourceDbContext>().InstancePerRequest();
-
-            // Repositories
-            builder.RegisterAssemblyTypes(typeof(ProductCatalogRepository).Assembly)
-                .Where(t => t.Name.EndsWith("Repository"))
-                .AsImplementedInterfaces().InstancePerRequest();
 
             // Services
             builder.RegisterAssemblyTypes(typeof(ProductCatalogService).Assembly)
@@ -43,7 +35,6 @@ namespace BaseSource.Api
 
             //Set the WebApi DependencyResolver
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container);
-            
         }
     }
 }

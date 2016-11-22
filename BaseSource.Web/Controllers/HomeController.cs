@@ -20,7 +20,6 @@ namespace BaseSource.Web.Controllers
 
         public ActionResult Get()
         {
-
             return View(productCatalogService.GetAll());
         }
     }

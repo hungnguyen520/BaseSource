@@ -1,4 +1,4 @@
-﻿using BaseSource.Data.Infrastructure;
+﻿using BaseSource.Repository.Core;
 using BaseSource.Model.Models;
 using System;
 using System.Collections.Generic;
