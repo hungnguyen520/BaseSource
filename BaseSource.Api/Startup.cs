@@ -26,9 +26,9 @@ namespace BaseSource.Api
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
 
             // Services
-            builder.RegisterAssemblyTypes(typeof(ProductCatalogService).Assembly)
-               .Where(t => t.Name.EndsWith("Service"))
-               .AsImplementedInterfaces().InstancePerRequest();
+            //builder.RegisterAssemblyTypes(typeof(ProductManagementService).Assembly)
+            //   .Where(t => t.Name.EndsWith("Service"))
+            //   .AsImplementedInterfaces().InstancePerRequest();
 
             Autofac.IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

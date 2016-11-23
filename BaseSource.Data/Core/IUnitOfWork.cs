@@ -7,8 +7,8 @@ namespace BaseSource.Repository.Core
     {
         void Commit();
 
-        ProductCatalogRepository productCatalogRepository { get; }
-        ProductRepository productRepository { get; }
+        ProductCatalogRepository ProductCatalogRepository { get; }
+        ProductRepository ProductRepository { get; }
 
     }
 }

@@ -1,26 +1,27 @@
-﻿using System.Web.Mvc;
-using BaseSource.Service;
-using BaseSource.Model.Models;
-using System.Collections;
-using System.Collections.Generic;
+﻿using BaseSource.Service;
+using System.Web.Mvc;
 
 namespace BaseSource.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IProductCatalogService productCatalogService;
-        public HomeController(IProductCatalogService productCatalogService)
+        private IProductManagementService _productManagementService;
+
+        public HomeController(IProductManagementService productManagementService)
         {
-            this.productCatalogService = productCatalogService;
+            this._productManagementService = productManagementService;
         }
+
+        //========================================================================================
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Get()
+        public ActionResult ProductCatalogList()
         {
-            return View(productCatalogService.GetAll());
+            return View(_productManagementService.GetAllProductCatalog());
         }
     }
 }

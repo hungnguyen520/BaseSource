@@ -1,7 +1,7 @@
 ﻿using System;
-using BaseSource.Repository.Repositories;
 using BaseSource.Factory.Core;
 using BaseSource.Factory.DbContexts;
+using BaseSource.Repository.Repositories;
 
 namespace BaseSource.Repository.Core
 {
@@ -15,11 +15,23 @@ namespace BaseSource.Repository.Core
         private ProductCatalogRepository _productCatalogRepository;
         private ProductRepository _productRepository;
 
-        ProductCatalogRepository IUnitOfWork.productCatalogRepository => _productCatalogRepository ?? (_productCatalogRepository = new ProductCatalogRepository(_dbContext));
-        ProductRepository IUnitOfWork.productRepository => _productRepository ?? (_productRepository = new ProductRepository(_dbContext));
+        public ProductCatalogRepository ProductCatalogRepository
+        {
+            get
+            {
+                return _productCatalogRepository ?? (_productCatalogRepository = new ProductCatalogRepository(_dbContext));
+            }
+        }
+
+        public ProductRepository ProductRepository
+        {
+            get
+            {
+                return _productRepository ?? (_productRepository = new ProductRepository(_dbContext));
+            }
+        }
 
         //===================================================================================================
-
 
         public UnitOfWork(IDbFactory dbFactory)
         {
@@ -30,6 +42,7 @@ namespace BaseSource.Repository.Core
         public void Commit()
         {
             _dbContext.SaveChanges();
+            this.DisposeCore();
         }
 
         protected override void DisposeCore()

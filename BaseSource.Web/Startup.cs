@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace BaseSource.Web
 {
-    public partial class Startup : IdentityStartup
+    public partial class Startup/* : IdentityStartup*/
     {
         public void Configuration(IAppBuilder app)
         {
@@ -29,11 +29,12 @@ namespace BaseSource.Web
 
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
+            builder.RegisterType<ProductManagementService>().As<IProductManagementService>().InstancePerRequest();
 
             // Services
-            builder.RegisterAssemblyTypes(typeof(ProductCatalogService).Assembly)
-               .Where(t => t.Name.EndsWith("Service"))
-               .AsImplementedInterfaces().InstancePerRequest();
+            //builder.RegisterAssemblyTypes(typeof(ProductManagementService).Assembly)
+            //   .Where(t => t.Name.EndsWith("Service"))
+            //   .AsImplementedInterfaces().InstancePerRequest();
 
             Autofac.IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
