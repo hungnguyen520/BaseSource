@@ -9,10 +9,10 @@ namespace BaseSource.Repository.Core
 {
     public abstract class RepositoryBase<TEntity, TKey> where TEntity : class
     {
-        private IMainDbContext _dbContext;
+        private MainDbContext _dbContext;
         private IDbSet<TEntity> _dbSet;
 
-        protected RepositoryBase(IMainDbContext dbContext)
+        protected RepositoryBase(MainDbContext dbContext)
         {
             this._dbContext = dbContext;
             this._dbSet = _dbContext.Set<TEntity>();

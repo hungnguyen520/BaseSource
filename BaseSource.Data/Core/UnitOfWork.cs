@@ -8,7 +8,7 @@ namespace BaseSource.Repository.Core
     public class UnitOfWork : Disposable, IUnitOfWork
     {
         private IDbFactory _dbFactory;
-        private IMainDbContext _dbContext;
+        private MainDbContext _dbContext;
 
         //===================================================================================================
 

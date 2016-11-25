@@ -224,10 +224,6 @@
       <Project>{b4b53d55-7845-4dbb-b315-d22be98bf214}</Project>
       <Name>BaseSource.Factory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BaseSource.Identity\BaseSource.Identity.csproj">
-      <Project>{ede4ec9e-8254-47da-adab-49561a76a113}</Project>
-      <Name>BaseSource.Identity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BaseSource.Model\BaseSource.Model.csproj">
       <Project>{70546904-d76d-4398-ad75-6f2bd01cc34e}</Project>
       <Name>BaseSource.Model</Name>

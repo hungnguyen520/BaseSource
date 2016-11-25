@@ -9,7 +9,7 @@ namespace BaseSource.Repository.Repositories
 {
     public class ProductRepository : RepositoryBase<Product, Guid>
     {
-        public ProductRepository(IMainDbContext dbContext) : base(dbContext)
+        public ProductRepository(MainDbContext dbContext) : base(dbContext)
         {
         }
 

@@ -5,9 +5,9 @@ namespace BaseSource.Factory.Core
     public class DbFactory : Disposable, IDbFactory
     {
 
-        private IMainDbContext _mainDbContext;
+        private MainDbContext _mainDbContext;
 
-        public IMainDbContext InitMainDbContext()
+        public MainDbContext InitMainDbContext()
         {
             return _mainDbContext ?? (_mainDbContext = new MainDbContext());
         }

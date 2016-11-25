@@ -2,7 +2,6 @@
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using BaseSource.Factory.Core;
-using BaseSource.Identity;
 using BaseSource.Repository.Core;
 using BaseSource.Service;
 using Microsoft.Owin;
@@ -15,7 +14,7 @@ using System.Web.Mvc;
 
 namespace BaseSource.Web
 {
-    public partial class Startup/* : IdentityStartup*/
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
@@ -27,19 +26,16 @@ namespace BaseSource.Web
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
+            // Register your Web API controllers.
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<ProductManagementService>().As<IProductManagementService>().InstancePerRequest();
 
-            // Services
-            //builder.RegisterAssemblyTypes(typeof(ProductManagementService).Assembly)
-            //   .Where(t => t.Name.EndsWith("Service"))
-            //   .AsImplementedInterfaces().InstancePerRequest();
-
             Autofac.IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            //Set the WebApi DependencyResolver
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container);
         }
     }

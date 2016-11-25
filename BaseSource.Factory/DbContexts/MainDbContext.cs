@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace BaseSource.Factory.DbContexts
 {
-    public class MainDbContext : DbContext, IMainDbContext
+    public class MainDbContext : DbContext
     {
         public MainDbContext() : base(Constants.CONNECTION_STRING)
         {
@@ -20,6 +20,5 @@ namespace BaseSource.Factory.DbContexts
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-
     }
 }
