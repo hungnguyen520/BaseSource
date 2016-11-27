@@ -58,13 +58,13 @@
       <Project>{c4f8dcfe-3fb3-42c9-8260-6ac4403debf9}</Project>
       <Name>BaseSource.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BaseSource.Data\BaseSource.Repository.csproj">
-      <Project>{141da08c-8929-47a7-8b5f-cf30ae446c7d}</Project>
-      <Name>BaseSource.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BaseSource.Model\BaseSource.Model.csproj">
       <Project>{70546904-d76d-4398-ad75-6f2bd01cc34e}</Project>
       <Name>BaseSource.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseSource.Repository\BaseSource.Repository.csproj">
+      <Project>{6e6acc6a-9190-464a-b39c-56f6ab325977}</Project>
+      <Name>BaseSource.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

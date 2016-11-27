@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
-using BaseSource.Factory.Core;
+using BaseSource.Identity;
 using BaseSource.Repository.Core;
 using BaseSource.Service;
 using Microsoft.Owin;
@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace BaseSource.Web
 {
-    public class Startup
+    public class Startup : ApplicationStartup
     {
         public void Configuration(IAppBuilder app)
         {
@@ -29,7 +29,6 @@ namespace BaseSource.Web
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<ProductManagementService>().As<IProductManagementService>().InstancePerRequest();
 

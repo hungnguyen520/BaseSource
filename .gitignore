@@ -25,3 +25,5 @@
 /BaseSource.Identity/bin
 /BaseSource.Factory/bin/Debug
 /BaseSource.Factory/obj/Debug
+/BaseSource.Repository/bin/Debug
+/BaseSource.Repository/obj/Debug
