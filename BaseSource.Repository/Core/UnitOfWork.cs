@@ -1,18 +1,20 @@
-﻿using BaseSource.Identity;
+﻿using BaseSource.Core.Contexts;
+using BaseSource.Core.Repositories;
+using BaseSource.Core.UnitOfWorks;
 using BaseSource.Repository.Repositories;
 
 namespace BaseSource.Repository.Core
 {
     public class UnitOfWork : Disposable, IUnitOfWork
     {
-        private ApplicationDbContext _dbContext;
+        private IEntityDbContext _dbContext;
 
         //===================================================================================================
 
-        private ProductCatalogRepository _productCatalogRepository;
-        private ProductRepository _productRepository;
+        private IProductCatalogRepository _productCatalogRepository;
+        private IProductRepository _productRepository;
 
-        public ProductCatalogRepository ProductCatalogRepository
+        public IProductCatalogRepository ProductCatalogRepository
         {
             get
             {
@@ -20,7 +22,7 @@ namespace BaseSource.Repository.Core
             }
         }
 
-        public ProductRepository ProductRepository
+        public IProductRepository ProductRepository
         {
             get
             {
@@ -30,12 +32,12 @@ namespace BaseSource.Repository.Core
 
         //===================================================================================================
 
-        public UnitOfWork()
+        public UnitOfWork(IEntityDbContext dbContext)
         {
-            _dbContext = ApplicationDbContext.Create();
+            _dbContext = dbContext;
         }
 
-        public void Commit()
+        public void Save()
         {
             _dbContext.SaveChanges();
             this.DisposeCore();

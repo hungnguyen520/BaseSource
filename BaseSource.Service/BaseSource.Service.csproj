@@ -49,14 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProductManagementService.cs" />
-    <Compile Include="ProductManagementService.cs" />
+    <Compile Include="ProductCatalogService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseSource.Common\BaseSource.Common.csproj">
       <Project>{c4f8dcfe-3fb3-42c9-8260-6ac4403debf9}</Project>
       <Name>BaseSource.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseSource.Core\BaseSource.Core.csproj">
+      <Project>{a0b7fcad-6a4b-4da6-b1d5-12c2ec35d9c8}</Project>
+      <Name>BaseSource.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\BaseSource.Model\BaseSource.Model.csproj">
       <Project>{70546904-d76d-4398-ad75-6f2bd01cc34e}</Project>

@@ -1,4 +1,5 @@
-﻿using BaseSource.Identity;
+﻿using BaseSource.Core.Contexts;
+using BaseSource.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,12 +8,12 @@ using System.Linq.Expressions;
 
 namespace BaseSource.Repository.Core
 {
-    public abstract class RepositoryBase<TEntity, TKey> where TEntity : class
+    public abstract class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey> where TEntity : class
     {
-        private ApplicationDbContext _dbContext;
+        private IEntityDbContext _dbContext;
         private IDbSet<TEntity> _dbSet;
 
-        protected RepositoryBase(ApplicationDbContext dbContext)
+        protected RepositoryBase(IEntityDbContext dbContext)
         {
             this._dbContext = dbContext;
             this._dbSet = _dbContext.Set<TEntity>();

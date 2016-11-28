@@ -1,13 +1,14 @@
-﻿using BaseSource.Model.Models;
-using System;
+﻿using BaseSource.Core.Contexts;
+using BaseSource.Core.Repositories;
+using BaseSource.Model.Models;
 using BaseSource.Repository.Core;
-using BaseSource.Identity;
+using System;
 
 namespace BaseSource.Repository.Repositories
 {
-    public class ProductCatalogRepository : RepositoryBase<ProductCatalog, Guid>
+    public class ProductCatalogRepository : RepositoryBase<ProductCatalog, Guid>, IProductCatalogRepository
     {
-        public ProductCatalogRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public ProductCatalogRepository(IEntityDbContext dbContext) : base(dbContext)
         {
         }
     }

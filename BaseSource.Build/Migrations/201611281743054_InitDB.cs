@@ -1,4 +1,4 @@
-namespace BaseSource.Identity.Migrations
+namespace BaseSource.Build.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

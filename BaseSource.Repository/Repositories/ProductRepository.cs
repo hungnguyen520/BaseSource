@@ -1,15 +1,16 @@
-﻿using BaseSource.Repository.Core;
+﻿using BaseSource.Core.Contexts;
+using BaseSource.Core.Repositories;
 using BaseSource.Model.Models;
+using BaseSource.Repository.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BaseSource.Identity;
 
 namespace BaseSource.Repository.Repositories
 {
-    public class ProductRepository : RepositoryBase<Product, Guid>
+    public class ProductRepository : RepositoryBase<Product, Guid>, IProductRepository
     {
-        public ProductRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public ProductRepository(IEntityDbContext dbContext) : base(dbContext)
         {
         }
 
@@ -73,15 +74,6 @@ namespace BaseSource.Repository.Repositories
         {
             var product = GetSingleById(productId);
             return GetMulti(x => x.IsDeleted == false && x.Id != productId && x.ProductCatalogId == product.ProductCatalogId).OrderByDescending(x => x.CreateDate).Take(top);
-        }
-
-        public bool SellProduct(Guid productId, int quantity)
-        {
-            var product = GetSingleById(productId);
-            if (product.NumberInStock < quantity)
-                return false;
-            product.NumberInStock -= quantity;
-            return true;
         }
     }
 }
