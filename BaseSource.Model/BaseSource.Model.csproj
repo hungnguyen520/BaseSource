@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\ProductCatalogDto.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\ModelBase.cs" />
@@ -67,9 +68,7 @@
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

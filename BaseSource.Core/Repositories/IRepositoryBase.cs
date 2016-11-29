@@ -7,15 +7,15 @@ namespace BaseSource.Core.Repositories
     public interface IRepositoryBase<TEntity, TKey> where TEntity : class
     {
         // Marks an entity as new
-        TEntity Add(TEntity entity);
+        void Add(TEntity entity);
 
         // Marks an entity as modified
         void Update(TEntity entity);
 
         // Marks an entity to be removed
-        TEntity Delete(TEntity entity);
+        void Delete(TEntity entity);
 
-        TEntity Delete(TKey id);
+        void Delete(TKey id);
 
         //Delete multi records
         void DeleteMulti(Expression<Func<TEntity, bool>> where);

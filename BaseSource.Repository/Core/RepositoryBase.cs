@@ -21,9 +21,9 @@ namespace BaseSource.Repository.Core
 
         //===============================================================================================
 
-        public virtual TEntity Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
-            return _dbSet.Add(entity);
+            _dbSet.Add(entity);
         }
 
         public virtual void Update(TEntity entity)
@@ -32,15 +32,15 @@ namespace BaseSource.Repository.Core
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public virtual TEntity Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
-            return _dbSet.Remove(entity);
+             _dbSet.Remove(entity);
         }
 
-        public virtual TEntity Delete(TKey id)
+        public virtual void Delete(TKey id)
         {
             var entity = _dbSet.Find(id);
-            return _dbSet.Remove(entity);
+            _dbSet.Remove(entity);
         }
 
         public virtual void DeleteMulti(Expression<Func<TEntity, bool>> where)

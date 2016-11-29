@@ -18,11 +18,10 @@ namespace BaseSource.Service
 
         //==================================================================================
 
-        public Product Add(Product product)
+        public void Add(Product product)
         {
-            var dto = _unitOfWork.ProductRepository.Add(product);
+            _unitOfWork.ProductRepository.Add(product);
             _unitOfWork.Save();
-            return dto;
         }
 
         public void Edit(Product product)
@@ -31,11 +30,10 @@ namespace BaseSource.Service
             _unitOfWork.Save();
         }
 
-        public Product Delete(Guid id)
+        public void Delete(Guid id)
         {
-            var dto = _unitOfWork.ProductRepository.Delete(id);
+            _unitOfWork.ProductRepository.Delete(id);
             _unitOfWork.Save();
-            return dto;
         }
 
         public IEnumerable<Product> GetAll()

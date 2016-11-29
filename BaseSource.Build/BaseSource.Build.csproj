@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201611281743054_InitDB.Designer.cs">
       <DependentUpon>201611281743054_InitDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611291305095_RemovePiorityPDC.cs" />
+    <Compile Include="Migrations\201611291305095_RemovePiorityPDC.Designer.cs">
+      <DependentUpon>201611291305095_RemovePiorityPDC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -86,6 +90,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611281743054_InitDB.resx">
       <DependentUpon>201611281743054_InitDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611291305095_RemovePiorityPDC.resx">
+      <DependentUpon>201611291305095_RemovePiorityPDC.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

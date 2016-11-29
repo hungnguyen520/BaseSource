@@ -1,4 +1,5 @@
-﻿using BaseSource.Model.Models;
+﻿using BaseSource.Model.Dtos;
+using BaseSource.Model.Models;
 using System;
 using System.Collections.Generic;
 
@@ -6,15 +7,15 @@ namespace BaseSource.Core
 {
     public interface IProductCatalogService
     {
-        ProductCatalog Add(ProductCatalog productCategory);
+        void Add(ProductCatalogDto dto);
 
-        void Edit(ProductCatalog productCategory);
+        void Edit(ProductCatalogDto dto);
 
-        ProductCatalog Delete(Guid id);
+        void Delete(Guid id);
 
         IEnumerable<ProductCatalog> GetAll();
 
-        ProductCatalog GetById(Guid id);
+        ProductCatalogDto GetById(Guid id);
 
     }
 }

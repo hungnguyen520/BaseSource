@@ -14,7 +14,6 @@ namespace BaseSource.Model.Models
         public DateTime? UpdateDate { get; set; }
 
         public string Name { get; set; }
-        public int Priority { get; set; }
         public virtual IEnumerable<Product> ProductList { get; set; }
     }
 }

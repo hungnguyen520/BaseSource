@@ -1,5 +1,6 @@
 ﻿using BaseSource.Core;
 using BaseSource.Core.UnitOfWorks;
+using BaseSource.Model.Dtos;
 using BaseSource.Model.Models;
 using System;
 using System.Collections.Generic;
@@ -17,24 +18,35 @@ namespace BaseSource.Service
 
         //==================================================================================
 
-        public ProductCatalog Add(ProductCatalog productCatalog)
+        public void Add(ProductCatalogDto dto)
         {
-            var dto = _unitOfWork.ProductCatalogRepository.Add(productCatalog);
+            ProductCatalog model = new ProductCatalog
+            {
+                Id = Guid.NewGuid(),
+                IsDeleted = false,
+                CreateDate = DateTime.Now,
+                UpdateDate = DateTime.Now,
+                Name = dto.Name
+            };
+            _unitOfWork.ProductCatalogRepository.Add(model);
             _unitOfWork.Save();
-            return dto;
         }
 
-        public void Edit(ProductCatalog productCatalog)
+        public void Edit(ProductCatalogDto dto)
         {
-            _unitOfWork.ProductCatalogRepository.Update(productCatalog);
+            var model = _unitOfWork.ProductCatalogRepository.GetSingleById(dto.Id);
+
+            model.UpdateDate = DateTime.Now;
+            model.Name = dto.Name;
+
+            _unitOfWork.ProductCatalogRepository.Update(model);
             _unitOfWork.Save();
         }
 
-        public ProductCatalog Delete(Guid id)
+        public void Delete(Guid id)
         {
-            var dto = _unitOfWork.ProductCatalogRepository.Delete(id);
+            _unitOfWork.ProductCatalogRepository.Delete(id);
             _unitOfWork.Save();
-            return dto;
         }
 
         public IEnumerable<ProductCatalog> GetAll()
@@ -42,9 +54,14 @@ namespace BaseSource.Service
             return _unitOfWork.ProductCatalogRepository.GetAll();
         }
 
-        public ProductCatalog GetById(Guid id)
+        public ProductCatalogDto GetById(Guid id)
         {
-            return _unitOfWork.ProductCatalogRepository.GetSingleById(id);
+            var model = _unitOfWork.ProductCatalogRepository.GetSingleById(id);
+            ProductCatalogDto dto = new ProductCatalogDto
+            {
+                Name = model.Name
+            };
+            return dto;
         }
     }
 }

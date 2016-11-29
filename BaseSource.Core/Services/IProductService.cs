@@ -6,11 +6,11 @@ namespace BaseSource.Core
 {
     public interface IProductService
     {
-        Product Add(Product product);
+        void Add(Product product);
 
         void Edit(Product product);
 
-        Product Delete(Guid id);
+        void Delete(Guid id);
 
         IEnumerable<Product> GetAll();
 
