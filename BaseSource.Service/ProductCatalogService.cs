@@ -2,6 +2,7 @@
 using BaseSource.Core.UnitOfWorks;
 using BaseSource.Model.Dtos;
 using BaseSource.Model.Models;
+using log4net;
 using System;
 using System.Collections.Generic;
 
@@ -9,59 +10,144 @@ namespace BaseSource.Service
 {
     public class ProductCatalogService : IProductCatalogService
     {
+        private ILog _logger;
+
         private IUnitOfWork _unitOfWork;
 
-        public ProductCatalogService(IUnitOfWork unitOfWork)
+        public ProductCatalogService(IUnitOfWork unitOfWork, ILog logger)
         {
             this._unitOfWork = unitOfWork;
+            this._logger = logger;
         }
 
         //==================================================================================
 
         public void Add(ProductCatalogDto dto)
         {
-            ProductCatalog model = new ProductCatalog
+            _logger.Info($"Enter Add ProductCatalog, dto = {dto}");
+
+            if (dto == null)
             {
-                Id = Guid.NewGuid(),
-                IsDeleted = false,
-                CreateDate = DateTime.Now,
-                UpdateDate = DateTime.Now,
-                Name = dto.Name
-            };
-            _unitOfWork.ProductCatalogRepository.Add(model);
-            _unitOfWork.Save();
+                _logger.Error($"ProductCatalog is null");
+                throw new ArgumentNullException("ProductCatalog is null");
+            }
+            else
+            {
+                try
+                {
+                    ProductCatalog model = new ProductCatalog
+                    {
+                        Id = Guid.NewGuid(),
+                        IsDeleted = false,
+                        CreateDate = DateTime.Now,
+                        UpdateDate = DateTime.Now,
+                        Name = dto.Name
+                    };
+                    _unitOfWork.ProductCatalogRepository.Add(model);
+                    _unitOfWork.Save();
+                }
+                catch (ApplicationException ex)
+                {
+                    _logger.Error(ex.ToString());
+                    throw new ApplicationException(ex.ToString());
+                }
+            }
         }
 
         public void Edit(ProductCatalogDto dto)
         {
-            var model = _unitOfWork.ProductCatalogRepository.GetSingleById(dto.Id);
+            _logger.Info($"Edit ProductCatalog, {dto}");
 
-            model.UpdateDate = DateTime.Now;
-            model.Name = dto.Name;
+            if (dto == null)
+            {
+                _logger.Error($"ProductCatalog is null");
+                throw new ArgumentNullException("ProductCatalog is null");
+            }
+            else
+            {
+                try
+                {
+                    var model = _unitOfWork.ProductCatalogRepository.GetSingleById(dto.Id);
+                    model.UpdateDate = DateTime.Now;
+                    model.Name = dto.Name;
+                    _unitOfWork.ProductCatalogRepository.Update(model);
+                    _unitOfWork.Save();
+                }
+                catch (ApplicationException ex)
+                {
+                    _logger.Error(ex.ToString());
+                    throw new ApplicationException(ex.ToString());
+                }
+            }
 
-            _unitOfWork.ProductCatalogRepository.Update(model);
-            _unitOfWork.Save();
         }
 
         public void Delete(Guid id)
         {
-            _unitOfWork.ProductCatalogRepository.Delete(id);
-            _unitOfWork.Save();
+            _logger.Info($"Delete ProductCatalog, {id}");
+
+            if (string.IsNullOrEmpty(id.ToString()))
+            {
+                _logger.Error($"ProductCatalog id not exist");
+                throw new ArgumentNullException("ProductCatalog id not exist");
+            }
+            else
+            {
+                try
+                {
+                    _unitOfWork.ProductCatalogRepository.Delete(id);
+                    _unitOfWork.Save();
+                }
+                catch (ApplicationException ex)
+                {
+                    _logger.Error(ex.ToString());
+                    throw new ApplicationException(ex.ToString());
+                }
+            }
+
         }
 
         public IEnumerable<ProductCatalog> GetAll()
         {
-            return _unitOfWork.ProductCatalogRepository.GetAll();
+            _logger.Info("Get all ProductCatalog");
+
+            try
+            {
+                return _unitOfWork.ProductCatalogRepository.GetAll();
+            }
+            catch (ApplicationException ex)
+            {
+                _logger.Error(ex.ToString());
+                throw new ApplicationException(ex.ToString());
+            }
         }
 
         public ProductCatalogDto GetById(Guid id)
         {
-            var model = _unitOfWork.ProductCatalogRepository.GetSingleById(id);
-            ProductCatalogDto dto = new ProductCatalogDto
+            _logger.Info($"Get ProductCatalog by Id, {id}");
+
+            if (string.IsNullOrEmpty(id.ToString()))
             {
-                Name = model.Name
-            };
-            return dto;
+                _logger.Error($"ProductCatalog id not exist");
+                throw new ArgumentNullException("ProductCatalog id not exist");
+            }
+            else
+            {
+                try
+                {
+                    var model = _unitOfWork.ProductCatalogRepository.GetSingleById(id);
+                    ProductCatalogDto dto = new ProductCatalogDto
+                    {
+                        Name = model.Name
+                    };
+                    return dto;
+                }
+                catch (ApplicationException ex)
+                {
+                    _logger.Error(ex.ToString());
+                    throw new ApplicationException(ex.ToString());
+                }
+            }
         }
     }
 }

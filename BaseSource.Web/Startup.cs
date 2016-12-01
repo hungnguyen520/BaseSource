@@ -10,13 +10,16 @@ using BaseSource.Repository;
 using BaseSource.Repository.Core;
 using BaseSource.Repository.Repositories;
 using BaseSource.Service;
+using log4net;
 using Microsoft.Owin;
 using Owin;
+using System;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
 
 [assembly: OwinStartupAttribute(typeof(BaseSource.Web.Startup))]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net.config", Watch = true)]
 
 namespace BaseSource.Web
 {
@@ -46,6 +49,10 @@ namespace BaseSource.Web
             //Service
             builder.RegisterType<ProductCatalogService>().As<IProductCatalogService>().InstancePerRequest();
             builder.RegisterType<ProductService>().As<IProductService>().InstancePerRequest();
+
+            //Logger
+            builder.Register(c => LogManager.GetLogger(typeof(Object))).As<ILog>();
+            
 
             Autofac.IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
