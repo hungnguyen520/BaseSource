@@ -6,6 +6,8 @@ using log4net;
 using System;
 using System.Collections.Generic;
 
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net.config", Watch = true)]
+
 namespace BaseSource.Service
 {
     public class ProductCatalogService : IProductCatalogService
@@ -14,10 +16,10 @@ namespace BaseSource.Service
 
         private IUnitOfWork _unitOfWork;
 
-        public ProductCatalogService(IUnitOfWork unitOfWork, ILog logger)
+        public ProductCatalogService(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
-            this._logger = logger;
+            _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }
 
         //==================================================================================
