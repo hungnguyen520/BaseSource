@@ -1,7 +1,10 @@
 namespace BaseSource.Build.Migrations
 {
+    using Identity;
+    using Identity.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -14,18 +17,30 @@ namespace BaseSource.Build.Migrations
 
         protected override void Seed(BaseSource.Build.BuildDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+            var user = new ApplicationUser()
+            {
+                UserName = "nphihung",
+                Email = "nphihung@tma.com.vn",
+                EmailConfirmed = true,
+                Birthday = DateTime.Now,
+                FullName = "Nguyen Phi Hung"
+            };
+
+            manager.Create(user, "12345678x@X");
+
+            if (!roleManager.Roles.Any())
+            {
+                roleManager.Create(new IdentityRole { Name = "Admin" });
+                roleManager.Create(new IdentityRole { Name = "User" });
+            }
+
+            var adminUser = manager.FindByEmail("nphihung@tma.com.vn");
+
+            manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
         }
     }
 }
